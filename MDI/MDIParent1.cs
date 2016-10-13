@@ -120,18 +120,18 @@ namespace MDI
 
         private void procesoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Formularios.fMenu.AbrirProceso();
+            Ciencia.Formularios.fMenu.AbrirProceso();
         }
         
 
         private void selectorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Formularios.fMenu.AbrirSelector();
+            Ciencia.Formularios.fMenu.AbrirSelector();
         }
 
         private void complementoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Formularios.fMenu.AbrirComplemento();
+            Ciencia.Formularios.fMenu.AbrirComplemento();
         }
 
         private void MDIParent1_Load(object sender, EventArgs e)
@@ -139,9 +139,9 @@ namespace MDI
             this.ShowIcon = false;
             var entry = ConfigurationManager.ConnectionStrings["ICBA.Properties.Settings.ConnStr"];
             StatusLabel.Text = entry.ConnectionString.Split(';')[0];
-            Formularios.fMenu.MdiParent = this;
-            Formularios.fMenu.StartPosition = FormStartPosition.CenterScreen;
-            Formularios.fMenu.Show();
+            Ciencia.Formularios.fMenu.MdiParent = this;
+            Ciencia.Formularios.fMenu.StartPosition = FormStartPosition.CenterScreen;
+            Ciencia.Formularios.fMenu.Show();
         }
 
         private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
