@@ -36,9 +36,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Generales, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Generales\Generales\dll\Generales.dll</HintPath>
+    <Reference Include="Generales">
+      <HintPath>..\..\..\..\Generales\dll\Generales.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
