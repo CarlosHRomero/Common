@@ -76,6 +76,15 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.BLL">
+      <HintPath>..\Common\dll\Common.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.OBJ">
+      <HintPath>..\Common\dll\Common.OBJ.dll</HintPath>
+    </Reference>
+    <Reference Include="Generales">
+      <HintPath>..\..\..\Generales\dll\Generales.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -142,18 +151,6 @@
       <Project>{ce4badeb-d46e-40b5-9421-e191bf848214}</Project>
       <Name>Cardiologia</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common\Common.BLL\Common.BLL\Common.BLL.csproj">
-      <Project>{3dd97d1e-e0d5-48b6-a8c3-04b772d434a0}</Project>
-      <Name>Common.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.OBJ\Common.OBJ.csproj">
-      <Project>{423e4d38-8f89-4a65-8a35-d6af22d1c79c}</Project>
-      <Name>Common.OBJ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common\Common.csproj">
-      <Project>{241cd245-931b-4077-9d16-632ae8ce842c}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Ciencia\trunk\Ciencia.BLL\Ciencia.BLL.csproj">
       <Project>{d5b3df01-68be-4d44-85c9-3fbca5d74288}</Project>
       <Name>Ciencia.BLL</Name>
@@ -161,6 +158,10 @@
     <ProjectReference Include="..\..\..\Ciencia\trunk\Ciencia\Ciencia.csproj">
       <Project>{317f7b0a-b610-4afe-8cab-38330cfdc43c}</Project>
       <Name>Ciencia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common\Common.csproj">
+      <Project>{241cd245-931b-4077-9d16-632ae8ce842c}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

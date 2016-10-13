@@ -47,6 +47,10 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.OBJ, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\Common.OBJ.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -90,16 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.BLL\Common.BLL\Common.BLL.csproj">
-      <Project>{3dd97d1e-e0d5-48b6-a8c3-04b772d434a0}</Project>
-      <Name>Common.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.OBJ\Common.OBJ.csproj">
-      <Project>{423e4d38-8f89-4a65-8a35-d6af22d1c79c}</Project>
-      <Name>Common.OBJ</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

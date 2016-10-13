@@ -6,7 +6,6 @@ using System.Configuration;
 using Ciencia.BLL;
 
 namespace MDI
-
 {
     public partial class MDIParent1 : Form
     {

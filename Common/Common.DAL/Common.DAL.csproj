@@ -77,12 +77,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.OBJ\Common.OBJ.csproj">
-      <Project>{423e4d38-8f89-4a65-8a35-d6af22d1c79c}</Project>
-      <Name>Common.OBJ</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release  xcopy  "$(TargetDir)$(ProjectName).dll"  "$(SolutionDir)dll" /Y</PostBuildEvent>
