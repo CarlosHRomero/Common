@@ -21,6 +21,15 @@ namespace Common.BLL
             }
 
         }
+        public clsUsuario ObtenerUsuario(int IdUsuario, int ModuloId)
+        {
+            return (UManager.GetUsuario(IdUsuario, ModuloId));
+        }
+
+        public clsUsuario ObtenerUsuario(String LogOn)
+        {
+            return (UManager.GetByLogOn(LogOn));
+        }
         public clsUsuario ValidarUsuario(clsUsuario user)
         {
             return (UManager.Autenticar(user));        

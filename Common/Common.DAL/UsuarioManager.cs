@@ -21,15 +21,14 @@ namespace Common.DAL
         {
             throw new NotImplementedException();
         }
+
         public clsUsuario GetByID(string Cod)
         {
             throw new NotImplementedException();
         }
-
-        
+     
         public clsUsuario Insertar(clsUsuario Obj)
         {
-            
             try
             {
                 if (GetByLogOn(Obj.User_LogOn) !=null)
@@ -46,6 +45,7 @@ namespace Common.DAL
             }
             return Obj;
         }
+
         public bool Modificar(clsUsuario Obj)
         {
            try
@@ -64,8 +64,6 @@ namespace Common.DAL
                Obj = null;
                return false;
            }
-           
-
         }
 
         public clsUsuario GetByLogOn(String LogOn)
@@ -100,6 +98,36 @@ namespace Common.DAL
 //                .Append("[User_Est_T], [User_Usr_T], [User_Menu], [User_Puesto_T], [User_Cons_T], [User_Nombre_Red]")//
         }
 
+        public clsUsuario GetUsuario(int IdUsuario, int ModuloId)
+        {
+            clsUsuario user;
+            List<clsUsuario> lista;
+            try
+            {
+                var sql = PetaPoco.Sql.Builder
+                    .Append("SELECT [User_Id], [Modulo_Id], [Rol_Id], [User_Nombre], [User_LogOn], [User_Pasw], [User_Pasw_F], [User_Pasw_D], [User_Obs], [User_ContDat], [User_LogOnErr], [User_EnSist], [User_Perf_T], [User_Est_T], [User_Usr_T], [User_Menu], [User_Puesto_T], [User_Cons_T], [User_Nombre_Red], [User_ABMv], [User_Prm] ")
+                    .Append("FROM [ICBA Cirugia 2003].[cirugia].[Usuario] ")
+                    .Append("WHERE [User_Id] =  @IdUsuario and [Modulo_Id] =  @IdModulo", new { IdUsuario = IdUsuario, IdModulo = ModuloId });
+
+                lista = db.Fetch<clsUsuario>(sql);
+                if (lista.Count > 0)
+                {
+                    user = lista.First();
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Utiles.WriteErrorLog(ex.Message);
+                return null;
+            }
+        }
+
         public clsUsuario Autenticar(clsUsuario user)
         {
             try
@@ -125,12 +153,10 @@ namespace Common.DAL
         private String EncriptarPass(String originalPassword)
         {
             SHA1 sha1 = new SHA1CryptoServiceProvider();
-
             byte[] inputBytes = (new UnicodeEncoding()).GetBytes(originalPassword);
             byte[] hash = sha1.ComputeHash(inputBytes);
             sha1.Dispose();
             return Convert.ToBase64String(hash);
-
         }
 
         public List<clsUsuario> Seleccionar(string Where, string OrderBy, string Limit)
@@ -139,10 +165,10 @@ namespace Common.DAL
             var sql = PetaPoco.Sql.Builder
                 .Append("SELECT [User_Id], [User_Nombre], [User_LogOn], [User_Pasw], [User_Pasw_F], " +
                 "[User_Pasw_D] FROM Hemo_User");
-
             Usuarios = db.Fetch<clsUsuario>(sql);
             return Usuarios;
         }
+
         public List<clsUsuario>  SeleccionarTodos(String order)
          {
              return Seleccionar("", order,"");

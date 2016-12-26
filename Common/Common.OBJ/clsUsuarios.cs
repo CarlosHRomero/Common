@@ -7,7 +7,9 @@ namespace Common.OBJ
 
     public class clsUsuario
     {
-        public int User_Id { get; set; } 
+        public int User_Id { get; set; }
+        [PetaPoco.Column("Modulo_Id")]
+        public int ModuloId { get; set; } 
         public String User_Nombre { get; set; }
         public String User_LogOn { get; set; }
         public String User_Pasw { get; set; }
