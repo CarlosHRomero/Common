@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using  Ciencia;
-using  Cardiologia;
 using System.Configuration;
-using Ciencia.BLL;
 
 namespace MDI
 {
@@ -109,8 +106,8 @@ namespace MDI
 
         private void cardiologiaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCardioPac f = new frmCardioPac {MdiParent = this};
-            f.Show();
+            //frmCardioPac f = new frmCardioPac {MdiParent = this};
+            //f.Show();
 
         }
 
@@ -137,8 +134,10 @@ namespace MDI
         private void MDIParent1_Load(object sender, EventArgs e)
         {
             this.ShowIcon = false;
-            var entry = ConfigurationManager.ConnectionStrings["ICBA.Properties.Settings.ConnStr"];
-            StatusLabel.Text = entry.ConnectionString.Split(';')[0];
+            var entry = ConfigurationManager.ConnectionStrings["ICBA.Properties.Settings.conStr"];
+            lblServPrin.Text = entry.ConnectionString.Split(';')[0];
+            entry = ConfigurationManager.ConnectionStrings["ICBA.Properties.Settings.conStrCiencia"];
+            lblServCiencia.Text = entry.ConnectionString.Split(';')[0];
             Ciencia.Formularios.fMenu.MdiParent = this;
             Ciencia.Formularios.fMenu.StartPosition = FormStartPosition.CenterScreen;
             Ciencia.Formularios.fMenu.Show();

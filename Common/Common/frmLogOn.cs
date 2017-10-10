@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using Common;
-using Common.BLL;
-using Common.OBJ;
-using Ciencia;
 
-namespace MDI
+using Common.OBJ;
+using Common.BLL;
+
+namespace Common
 {
     public partial class frmLogOn : Form
     {
@@ -19,22 +18,20 @@ namespace MDI
             {
                 _usuario = value;
             }
-
         }
 
-        public Boolean validado {get; set;}
+        public Boolean Validado {get; set;}
         public frmLogOn()
         {
             InitializeComponent();
-            validado=false;
+            Validado=false;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             Usuario.User_LogOn = txtLogOn.Text;
             Usuario.User_Pasw = txtPassw.Text;
-            Usuario.User_Pasw_F = DateTime.Today;
-            Common.BLL.UsuarioBuss obj = new UsuarioBuss();
+            UsuarioBuss obj = new UsuarioBuss();
             if (_modo == "Ingresar")
             {
                 if ((Usuario = obj.ValidarUsuario(Usuario)) != null)
@@ -59,7 +56,7 @@ namespace MDI
                 }
                 try
                 {
-                    if (obj.NuevoUsuario(Usuario) == true)
+                    if (obj.NuevoUsuario(Usuario))
                     {
                         MessageBox.Show("Usuario ingresado con éxito", "Ingresar usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ModoIngresar();
@@ -84,14 +81,13 @@ namespace MDI
                     txtLogOn.Focus();
                     return;
                 }
-
                 ModificarUsuario(obj);
             }
         }
 
         void ModificarUsuario(UsuarioBuss obj)
         {
-            if (this.txtNvaCont.Text != txtConfCont.Text)
+            if (txtNvaCont.Text != txtConfCont.Text)
             {
                 MessageBox.Show("La contraseña no coincide", "Modificar contraseña", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
@@ -99,7 +95,8 @@ namespace MDI
             try
             {
                 Usuario.User_Pasw = txtNvaCont.Text;
-                if (obj.ModificarContraseña(Usuario) == true)
+                Usuario.User_Pasw_F = DateTime.Today;
+                if (obj.ModificarContraseña(Usuario))
                 {
                     MessageBox.Show("Contraseña modificada con éxito", "Modificar contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     PermitirAcceso();
@@ -127,16 +124,19 @@ namespace MDI
 
         void PermitirAcceso()
         {
-            Ambiente.Usuario = Usuario;
-            Ambiente.Maquina = Environment.MachineName;
+            Common.BLL.Ambiente.Usuario = Usuario;
+            Common.BLL.Ambiente.Maquina = Environment.MachineName;
+            if (Ambiente.Maquina == "ICBATERMINALNEW" || Ambiente.Maquina == "ICBATERMINAL")
+                Ambiente.Centro = "Anchorena";
+            else
+                Ambiente.Centro = "ICBA";
+            //Seguridad.Permisos = BusinessLayer.PermisosB.ObetnerPermisosPorUsuario(Usuario);
             DialogResult= DialogResult.OK;
-            var segB = new Common.BLL.PermisosBuss();
-            Seguridad.Permisos = segB.ObetnerPermisosPorUsuario(Usuario);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            validado = false;
+            Validado = false;
             Close();
         }
 
@@ -157,13 +157,14 @@ namespace MDI
 
         private void frmLogOn_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
             ModoCambiarContraseña();
         }
+
         void ModoCambiarContraseña()
         {
             lblCambiarCont.Visible = false;

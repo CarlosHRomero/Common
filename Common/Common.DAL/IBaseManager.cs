@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DAL
 {
-    interface IBaseManager<T>
+    public interface IBaseManager<T>
     {
         T GetByID(string Cod);
 

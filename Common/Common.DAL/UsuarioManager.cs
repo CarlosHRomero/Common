@@ -11,7 +11,7 @@ namespace Common.DAL
     
     public class UsuarioManager:IBaseManager<clsUsuario>
     {
-        private PetaPoco.Database db = new PetaPoco.Database("ICBA.Properties.Settings.ConnStr");
+        private PetaPoco.Database db = new PetaPoco.Database("ICBA.Properties.Settings.conStr");
         public bool Eliminar(clsUsuario Obj)
         {
             throw new NotImplementedException();
@@ -74,7 +74,7 @@ namespace Common.DAL
             {
                 var sql = PetaPoco.Sql.Builder
                     .Append("SELECT [User_Id], [User_Nombre] , [User_LogOn], [User_Pasw], [User_Pasw_F] ")
-                    .Append("FROM [ICBA Cirugia 2003].[cirugia].[User] ")
+                    .Append("FROM [ICBA Cirugia 2003].[cirugia].[Usuario] ")
                     .Append("WHERE User_LogOn =  @pLogOn", new { pLogOn = LogOn });
                 
                 lista = db.Fetch<clsUsuario>(sql);
@@ -173,6 +173,10 @@ namespace Common.DAL
          {
              return Seleccionar("", order,"");
          }
-
+        public List<clsUsuario> SeleccionarPorModulo(int ModuloId, string order)
+        {
+            string where = string.Format("Modulo_Id = {0}", ModuloId.ToString());
+            return Seleccionar(where, order, "");
+        }
     }
 }

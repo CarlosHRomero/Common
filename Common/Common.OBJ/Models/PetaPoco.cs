@@ -5549,7 +5549,14 @@ namespace PetaPoco
                 }
                 else
                 {
-                    return delegate(object src) { return Convert.ChangeType(src, dstType, null); };
+                    try
+                    {
+                        return delegate(object src) { return Convert.ChangeType(src, dstType, null); };
+                    }
+                    catch(Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
             }
 

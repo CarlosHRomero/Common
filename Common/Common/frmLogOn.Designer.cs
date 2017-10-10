@@ -1,4 +1,4 @@
-﻿namespace MDI
+﻿namespace Common
 {
     partial class frmLogOn
     {
@@ -7,22 +7,15 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        /// 
-        /// 
-        /// 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing && (components != null))
-        //    {
-        //        components.Dispose();
-        //    }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
 
-        //    base.Dispose(disposing);
-        //}
+            base.Dispose(disposing);
+        }
 
         #region Windows Form Designer generated code
 
@@ -220,7 +213,7 @@
             this.MinimizeBox = false;
             this.Name = "frmLogOn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hemodinamia";
+            this.Text = "Autenticar Usuario";
             this.Load += new System.EventHandler(this.frmLogOn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
