@@ -36,9 +36,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Generales">
-      <HintPath>..\..\..\..\Generales\dll\Generales.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\Cardiologia\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +83,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Generales\Generales.csproj">
+      <Project>{50d756df-a3e9-4dad-a226-493f65005d85}</Project>
+      <Name>Generales</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.OBJ\Common.OBJ.csproj">
       <Project>{423e4d38-8f89-4a65-8a35-d6af22d1c79c}</Project>
       <Name>Common.OBJ</Name>

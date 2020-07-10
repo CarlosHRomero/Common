@@ -10,7 +10,7 @@ namespace Common.DAL
 {
     public class PermisosManager
     {
-        private readonly PetaPoco.Database _db = new PetaPoco.Database("ICBA.Properties.Settings.conStr");
+        private readonly PetaPoco.Database _db = new PetaPoco.Database("Au.Properties.Settings.conStr");
         public List<Permiso> ObetnerPermisosPorUsuario(clsUsuario usuario)
         {
             try

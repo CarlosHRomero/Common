@@ -131,7 +131,7 @@ namespace MDI
             Ambiente.Maquina = Environment.MachineName;
             DialogResult= DialogResult.OK;
             var segB = new Common.BLL.PermisosBuss();
-            Seguridad.Permisos = segB.ObetnerPermisosPorUsuario(Usuario);
+            //Seguridad.Permisos = segB.ObetnerPermisosPorUsuario(Usuario);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

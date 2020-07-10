@@ -11,7 +11,7 @@ namespace Common.DAL
     
     public class UsuarioManager:IBaseManager<clsUsuario>
     {
-        private PetaPoco.Database db = new PetaPoco.Database("ICBA.Properties.Settings.conStr");
+        private PetaPoco.Database db = new PetaPoco.Database("Au.Properties.Settings.conStr");
         public bool Eliminar(clsUsuario Obj)
         {
             throw new NotImplementedException();

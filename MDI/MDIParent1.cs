@@ -134,9 +134,9 @@ namespace MDI
         private void MDIParent1_Load(object sender, EventArgs e)
         {
             this.ShowIcon = false;
-            var entry = ConfigurationManager.ConnectionStrings["ICBA.Properties.Settings.conStr"];
+            var entry = ConfigurationManager.ConnectionStrings["Au.Properties.Settings.conStr"];
             lblServPrin.Text = entry.ConnectionString.Split(';')[0];
-            entry = ConfigurationManager.ConnectionStrings["ICBA.Properties.Settings.conStrCiencia"];
+            entry = ConfigurationManager.ConnectionStrings["Au.Properties.Settings.conStrCiencia"];
             lblServCiencia.Text = entry.ConnectionString.Split(';')[0];
             Ciencia.Formularios.fMenu.MdiParent = this;
             Ciencia.Formularios.fMenu.StartPosition = FormStartPosition.CenterScreen;
