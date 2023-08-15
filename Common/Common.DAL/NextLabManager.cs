@@ -8,6 +8,14 @@ namespace Common.DAL
     {
         private readonly PetaPoco.Database _db = new PetaPoco.Database("Electrofisiologia.Properties.Settings.ConnStrNextlab");
 
+        public List<clsNextLab> ObtenerDatosLaboratorioNextLab(clsPacNextLab pacNextLab, DateTime fi,
+        DateTime ff)
+        {
+            DateTime dateTime1 = ff.AddDays(1.0);
+            DateTime dateTime2 = fi;
+            List<clsNextLab> clsNextLabList = this.Seleccionar("(lisord.cod_pac= " + (object)pacNextLab.cod_pac + " AND lisbitres.sts_det='VA' AND fec_res between'" + dateTime2.ToString("MM/dd/yyyy") + "' AND '" + dateTime1.ToString("MM/dd/yyyy") + "')", "lisbitres.nro_ord, lisbitres.fec_res", "");
+            return clsNextLabList != null && clsNextLabList.Count > 0 ? clsNextLabList : (List<clsNextLab>)null;
+        }
         public List<clsNextLab> ObtenerDatosLaboratorioNextLab(clsPacNextLab pacNextLab, DateTime labFecha)
         {
             DateTime labFechaHasta = labFecha.AddDays(1);
@@ -15,7 +23,7 @@ namespace Common.DAL
             String where = "(lisord.cod_pac= " + pacNextLab.cod_pac +
                            " AND lisbitres.sts_det='VA' AND fec_res>='" + labFechaDesde.ToString(@"MM/dd/yyyy") +
                            "' AND fec_res<='" + labFechaHasta.ToString(@"MM/dd/yyyy") + "')";
-                           //"' AND (Cod_Det='771' OR Cod_Det='192' OR Cod_Det='192S' OR Cod_Det='771R'))";
+            //"' AND (Cod_Det='771' OR Cod_Det='192' OR Cod_Det='192S' OR Cod_Det='771R'))";
             String orderBy = "lisbitres.nro_ord, lisbitres.fec_res";
             List<clsNextLab> lista = Seleccionar(where, orderBy, "");
             if (lista != null && lista.Count > 0)

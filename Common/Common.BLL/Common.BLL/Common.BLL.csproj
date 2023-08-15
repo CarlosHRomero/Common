@@ -54,6 +54,7 @@
     <Compile Include="Ambiente.cs" />
     <Compile Include="ITablaBuss.cs" />
     <Compile Include="NextLabBuss.cs" />
+    <Compile Include="PacNextLabBuss.cs" />
     <Compile Include="PermisosBuss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioBuss.cs" />

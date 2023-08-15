@@ -24,6 +24,7 @@ namespace MDI
                 f.ShowDialog();
                 if (f.DialogResult == DialogResult.OK)
                     Application.Run(new MDIParent1());
+
             }
             catch (Exception ex)
             {

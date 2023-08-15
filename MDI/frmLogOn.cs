@@ -4,6 +4,11 @@ using Common;
 using Common.BLL;
 using Common.OBJ;
 using Ciencia;
+using System.Text;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace MDI
 {
@@ -29,6 +34,25 @@ namespace MDI
             validado=false;
         }
 
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            this.Usuario.User_LogOn = this.txtLogOn.Text;
+            this.Usuario.User_Pasw = this.txtPassw.Text;
+            if (!this.Logon_new(this.Usuario.User_LogOn, this.Usuario.User_Pasw))
+            {
+                int num = (int)MessageBox.Show("Usuario y/o Contraseña erronea. Vuelva a intentarlo", "Ingresar usuario", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                this.txtLogOn.Text = "";
+                this.txtPassw.Text = "";
+                this.txtLogOn.Focus();
+            }
+            else
+            {
+                this.PermitirAcceso();
+                this.Close();
+            }
+        }
+
+        /*
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             Usuario.User_LogOn = txtLogOn.Text;
@@ -87,7 +111,38 @@ namespace MDI
 
                 ModificarUsuario(obj);
             }
+        }*/
+
+        public bool Logon_new(string user, string password)
+        {
+            object obj = (object)new
+            {
+                SUUsuario = user,
+                SUClave = password,
+                CaseSensitive = true
+            };
+            ByteArrayContent byteArrayContent = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj)));
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("http://evoweb/HCEI/rest/ValidarUsuarioCxCardREST");
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage result = HttpClientExtensions.PostAsJsonAsync<object>(httpClient, "", obj).Result;
+            bool flag;
+            if (result.IsSuccessStatusCode)
+            {
+                if (((Task<frmLogOn.RespuestaLogin>)HttpContentExtensions.ReadAsAsync<frmLogOn.RespuestaLogin>(result.Content)).Result.ErrorCod == 0)
+                {
+                    flag = true;
+                    clsUsuario clsUsuario = new clsUsuario();
+                }
+                else
+                    flag = false;
+            }
+            else
+                flag = false;
+            httpClient.Dispose();
+            return flag;
         }
+
 
         void ModificarUsuario(UsuarioBuss obj)
         {
@@ -186,6 +241,12 @@ namespace MDI
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+        public class RespuestaLogin
+        {
+            public int ErrorCod { get; set; }
+
+            public string ErrorDsc { get; set; }
         }
     }
 }

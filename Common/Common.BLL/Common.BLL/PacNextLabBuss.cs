@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using Common.DAL;
 using Common.OBJ;
 
-namespace Electrofisiologia.BLL
+namespace Common.BLL
 {
     public class PacNextLabBuss
     {
-        public List<clsPacNextLab> ObtenerHistoriaPaciente(clsPaciente paciente)
-        {
-            PacNextLabManager manager = new PacNextLabManager();
-            List<clsPacNextLab> lista = manager.ObtenerDatosPacientesNextLab(paciente);
-            return lista;
-        }
+        public clsPacNextLab Leer(int codPac) => new PacNextLabManager().GetByID(codPac.ToString());
+        //public List<clsPacNextLab> ObtenerHistoriaPaciente(clsPaciente paciente)
+        //{
+        //    PacNextLabManager manager = new PacNextLabManager();
+        //    List<clsPacNextLab> lista = manager.ObtenerDatosPacientesNextLab(paciente);
+        //    return lista;
+        //}
     }
 }

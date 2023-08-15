@@ -13,6 +13,14 @@ namespace Common.BLL
             List<clsNextLab> lista = manager.ObtenerDatosLaboratorioNextLab(pacNextLab, antLabF);
             return lista;
         }
+        public List<clsNextLab> ObtenerDatosLaboratorioNextLabs(
+  clsPacNextLab pacNextLab,
+  DateTime fi,
+  DateTime ff)
+        {
+            return new NextLabManager().ObtenerDatosLaboratorioNextLab(pacNextLab, fi, ff);
+        }
+
 
         public List<clsNextLab> ObtenerDatosLaboratorioNextLabsDia(clsPacNextLab pacNextLab, DateTime antLabF)
         {

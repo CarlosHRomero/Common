@@ -11,6 +11,21 @@ namespace Common.DAL
     {
         private readonly PetaPoco.Database _db = new PetaPoco.Database("Electrofisiologia.Properties.Settings.ConnStrNextlab");
 
+        public clsPacNextLab GetByID(string Cod)
+        {
+            try
+            {
+                return this._db.SingleOrDefault<clsPacNextLab>("SELECT * FROM lispac WHERE cod_pac=@0", new object[1]
+                {
+          (object) Cod
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en PacNextLabManager.GetByID " + ex.Message);
+            }
+        }
+
         public List<clsPacNextLab> ObtenerDatosPacientesNextLab(clsPacNextLab paciente)
         {
             String where = "(ape_pac Like '%" + paciente.ape_pac.Trim() + "%' AND nom_pac Like '%" + paciente.nom_pac.Trim() + "%' AND year(fna_pac) = " + paciente.fna_pac.Value.Year + " AND month(fna_pac) = " + paciente.fna_pac.Value.Month + " AND day(fna_pac) = " + paciente.fna_pac.Value.Day + ")";
