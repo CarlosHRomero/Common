@@ -27,11 +27,11 @@ namespace MDI
 
         }
 
-        public Boolean validado {get; set;}
+        public Boolean validado { get; set; }
         public frmLogOn()
         {
             InitializeComponent();
-            validado=false;
+            validado = false;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -115,18 +115,27 @@ namespace MDI
 
         public bool Logon_new(string user, string password)
         {
-            object obj = (object)new
+            object obj = new
             {
+                EmpresaC = 1,
+                inApiKey = "gfZmfdGo0PmFw2eD64CMaygBktrQrl6sZ0tHN9R4dPNP5SG77xFoAsCRqNzMXX2H",
                 SUUsuario = user,
                 SUClave = password,
                 CaseSensitive = true
+                //ValidarRol= 3
             };
+
+
             ByteArrayContent byteArrayContent = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj)));
             HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://evoweb/HCEI/rest/ValidarUsuarioCxCardREST");
+            string URL = "https://servicios.icba.com.ar/HCE_WS/rest/ValidarUsuarioREST";
+
+            httpClient.BaseAddress = new Uri(URL);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage result = HttpClientExtensions.PostAsJsonAsync<object>(httpClient, "", obj).Result;
             bool flag;
+            //            var response = (await client.PostAsync(URL, content));
+            //var result= response.Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (result.IsSuccessStatusCode)
             {
                 if (((Task<frmLogOn.RespuestaLogin>)HttpContentExtensions.ReadAsAsync<frmLogOn.RespuestaLogin>(result.Content)).Result.ErrorCod == 0)
@@ -184,7 +193,7 @@ namespace MDI
         {
             Ambiente.Usuario = Usuario;
             Ambiente.Maquina = Environment.MachineName;
-            DialogResult= DialogResult.OK;
+            DialogResult = DialogResult.OK;
             var segB = new Common.BLL.PermisosBuss();
             //Seguridad.Permisos = segB.ObetnerPermisosPorUsuario(Usuario);
         }
@@ -212,7 +221,7 @@ namespace MDI
 
         private void frmLogOn_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -224,7 +233,7 @@ namespace MDI
             lblCambiarCont.Visible = false;
             lblTitulo.Text = "Cambiar Contraseña";
             lblCont.Text = "Contraseña actual:";
-            lblCont.Left = lblCont.Left- 40;
+            lblCont.Left = lblCont.Left - 40;
             _modo = "Modificar";
             txtNvaCont.Visible = true;
             lbNvaCont.Visible = true;
